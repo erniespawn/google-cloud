@@ -9,20 +9,16 @@ jobs:
       contents: 'read'
       id-token: 'write'
 
+    steps:
+    - uses: 'actions/checkout@v3'
 
-steps:
-- id: 'auth'
-  name: 'Authenticate to Google Cloud'
-  uses: 'google-github-actions/auth@v0.4.0'
-  with:
-    token_format: 'access_token'
-    workload_identity_provider: 'projects/221742135820/locations/global/workloadIdentityPools/githubactions/providers/erniespawn/google-cloud'
-    service_account: 'githubactions@github-actions-384318.iam.gserviceaccount.com'
-
-- name: 'Access secret'
-  run: |-
-    curl https://secretmanager.googleapis.com/v1/projects/my-project/secrets/my-secret/versions/1:access \
-      --header "Authorization: Bearer ${{ steps.auth.outputs.access_token }}"
-
+    # Configure Workload Identity Federation via a credentials file.
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        token_format: 'access_token'
+        workload_identity_provider: 'projects/221742135820/locations/global/workloadIdentityPools/githubactions/providers/github'
+        service_account: 'githubactions@github-actions-384318.iam.gserviceaccount.com'
 
 
