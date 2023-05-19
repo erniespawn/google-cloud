@@ -1,24 +1,44 @@
-name: Get secrets from secret manager
-on: 
-  workflow_dispatch
+name: Connect to GCP and List Instances
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+
 jobs:
-  get-secret:
+  setup-prepare-list:
+    name: Setup, Prepare,
     runs-on: ubuntu-latest
-    # Add "id-token" with the intended permissions.
+
     permissions:
       contents: 'read'
       id-token: 'write'
 
     steps:
-    - uses: 'actions/checkout@v3'
+    - name: Checkout
+      uses: actions/checkout@v3
 
-    # Configure Workload Identity Federation via a credentials file.
+    # Configure Workload Identity Federation and generate an access token.
     - id: 'auth'
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
       with:
         token_format: 'access_token'
-        workload_identity_provider: 'projects/221742135820/locations/global/workloadIdentityPools/github-wif-pool/PradeepSingh1988/gcp-wif'
-        service_account: 'githubactions@github-actions-384318.iam.gserviceaccount.com'
+        workload_identity_provider:  ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_ID }}
+        service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 
+    # List the instances in the project
+    - name: List Instances
+      run: |-
+        gcloud compute instances list --project $GCP_PROJECT_ID
+        
+        
+        
+        
+        
+        
+        
+        
 
