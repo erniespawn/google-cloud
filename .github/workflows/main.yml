@@ -34,6 +34,24 @@ jobs:
       run: |-
         gcloud compute instances list --project github-actions-384318
         
+    # Read secret     
+    - id: 'gcloud'
+      name: 'gcloud'
+      run: |-
+        gcloud secrets versions access "latest" --secret "testing-secret"
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
