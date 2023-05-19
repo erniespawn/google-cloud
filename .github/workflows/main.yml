@@ -32,7 +32,7 @@ jobs:
     # List the instances in the project
     - name: List Instances
       run: |-
-      gcloud compute instances list --project github-actions-384318
+        gcloud compute instances list --project github-actions-384318
         
     # Read secret     
     - id: 'gcloud'
