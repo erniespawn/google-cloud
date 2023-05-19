@@ -18,7 +18,7 @@ jobs:
       uses: 'google-github-actions/auth@v1'
       with:
         token_format: 'access_token'
-        workload_identity_provider: 'projects/221742135820/locations/global/workloadIdentityPools/id-pool'
+        workload_identity_provider: 'projects/221742135820/locations/global/workloadIdentityPools/github-wif-pool/PradeepSingh1988/gcp-wif'
         service_account: 'githubactions@github-actions-384318.iam.gserviceaccount.com'
 
 
