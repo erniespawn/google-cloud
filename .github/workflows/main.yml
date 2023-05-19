@@ -30,9 +30,9 @@ jobs:
         service_account: 'dev-github-wif-pool@github-actions-384318.iam.gserviceaccount.com'
 
     # List the instances in the project
-    #- name: List Instances
-    #  run: |-
-    #  gcloud compute instances list --project github-actions-384318
+    - name: List Instances
+      run: |-
+      gcloud compute instances list --project github-actions-384318
         
     # Read secret     
     - id: 'gcloud'
