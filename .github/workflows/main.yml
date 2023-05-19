@@ -27,7 +27,7 @@ jobs:
       with:
         token_format: 'access_token'
         workload_identity_provider:  ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_ID }}
-        service_account: '221742135820-compute@developer.gserviceaccount.com'
+        service_account: 'dev-github-wif-pool@github-actions-384318.iam.gserviceaccount.com'
 
     # List the instances in the project
     - name: List Instances
