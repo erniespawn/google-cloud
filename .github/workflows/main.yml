@@ -5,6 +5,7 @@ on:
     branches: [ "main" ]
 
 env:
+  IMAGE_NAME: lesson-087
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
 
 jobs:
