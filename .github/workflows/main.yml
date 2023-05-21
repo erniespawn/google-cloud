@@ -39,3 +39,26 @@ jobs:
       name: 'gcloud'
       run: |-
         gcloud secrets versions access "latest" --secret "testing-secret"
+        
+        
+        
+              
+    - name: Build Docker Image
+        env:
+          IMAGE_NAME: linux_tweet_app #create env called IMAGE_NAME consisted of actual name of Docker Image after we build
+          PROJECT_ID: github-actions-384318
+        run: docker build -t $IMAGE_NAME:latest . #build the docker image
+        
+    - name: Configure Docker Client
+        run:  |-
+          gcloud auth configure-docker --quiet #authenticate to gcr
+        
+    - name: Push Docker Image to Container Registry GCR
+        env: 
+          IMAGE_NAME: linux_tweet_app
+          PROJECT_ID: github-actions-384318
+        #tag docker image to gcr image format then push to gcr
+        run: |-
+          docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest 
+          docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest 
+          
