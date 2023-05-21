@@ -52,6 +52,7 @@ jobs:
     - name: Configure Docker Client
       run:  |-
         gcloud auth configure-docker --quiet #authenticate to gcr
+        gcloud auth configure-docker europe-docker.pkg.dev
         
     - name: Push Docker Image to Container Registry GCR
       env: 
@@ -68,10 +69,16 @@ jobs:
       env:
         GIT_TAG: v1.2
       run: |-
-        docker tag $IMAGE_NAME:latest us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
-        docker tag $IMAGE_NAME:latest us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:$GIT_TAG
-        docker push us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
-        docker push us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:$GIT_TAG
+        docker tag $IMAGE_NAME:latest europe-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
+        docker tag $IMAGE_NAME:latest europe-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:$GIT_TAG
+        docker push europe-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
+        docker push ueurope-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:$GIT_TAG
         
+    
+    
+    
+    
+    
+    
     
     
