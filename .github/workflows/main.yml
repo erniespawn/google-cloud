@@ -59,26 +59,24 @@ jobs:
         IMAGE_NAME: linux_tweet_app
         PROJECT_ID: github-actions-384318
       #tag docker image to gcr image format then push to gcr
-      run: |-
-        docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest 
-        docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest 
+      run: |-        
+        docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/images/$IMAGE_NAME:latest
+        docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/images/$IMAGE_NAME:$GIT_TAG
+        docker push gcr.io/$PROJECT_ID/images/$IMAGE_NAME:latest
+        docker push gcr.io/$PROJECT_ID/images/$IMAGE_NAME:$GIT_TAG
         
         
     
     - name: Push Docker Image to Artifact Registry
       env:
         GIT_TAG: v1.2
+        IMAGE_NAME: linux_tweet_app55
+        PROJECT_ID: github-actions-384318
       run: |-
         docker tag $IMAGE_NAME:latest europe-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
         docker tag $IMAGE_NAME:latest europe-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:$GIT_TAG
         docker push europe-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
-        docker push ueurope-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:$GIT_TAG
+        docker push europe-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:$GIT_TAG
         
-    
-    
-    
-    
-    
-    
     
     
