@@ -39,12 +39,3 @@ jobs:
       name: 'gcloud'
       run: |-
         gcloud secrets versions access "latest" --secret "testing-secret"
-        
-    
-     - name: Build Docker Image
-        env:
-          IMAGE_NAME: linux_tweet_app2 #create env called IMAGE_NAME consisted of actual name of Docker Image after we build
-          PROJECT_ID: github-actions-384318
-        run: docker build -t $IMAGE_NAME:latest . #build the docker image
-        
-     
