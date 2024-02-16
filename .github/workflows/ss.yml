@@ -27,7 +27,7 @@ jobs:
       uses: 'google-github-actions/auth@v1'
       with:
         token_format: 'access_token'
-        workload_identity_provider:  "projects/1076063715960/locations/global/workloadIdentityPools/my-pool/attribute.repository/my-org/my-repo"
+        workload_identity_provider:  "projects/1076063715960/locations/global/workloadIdentityPools/my-pool"
         service_account: 'test-wif@wif-testing-412508.iam.gserviceaccount.com'
 
     # List the instances in the project
