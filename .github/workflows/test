@@ -1,0 +1,28 @@
+
+
+
+
+steps:
+- id: 'auth'
+  name: 'Authenticate to Google Cloud'
+  uses: 'google-github-actions/auth@v0.4.0'
+  with:
+    workload_identity_provider: 'projects/1076063715960/locations/global/workloadIdentityPools/my-pool/attribute.repository/my-org/my-repo'
+    service_account: 'test-wif@wif-testing-412508.iam.gserviceaccount.com'
+
+
+steps:
+- id: auth
+  uses: google-github-actions/auth@v0.4.0
+  with:
+    workload_identity_provider: 'projects/1076063715960/locations/global/workloadIdentityPools/my-pool/attribute.repository/my-org/my-repo'
+    service_account: 'test-wif@wif-testing-412508.iam.gserviceaccount.com'
+
+- id: get-gke-credentials
+  uses: google-github-actions/get-gke-credentials@v0.4.0
+  with:
+    cluster_name: my-cluster
+    location: europe-west4
+
+- id: get-pods
+  run: kubectl get pods
