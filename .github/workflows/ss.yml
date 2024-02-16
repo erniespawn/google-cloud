@@ -17,18 +17,26 @@ jobs:
       contents: 'read'
       id-token: 'write'
 
-   steps:
-- id: auth
-  uses: google-github-actions/auth@v0.4.0
-  with:
-    workload_identity_provider: 'projects/1076063715960/locations/global/workloadIdentityPools/my-pool/attribute.repository/my-org/my-repo'
-    service_account: 'test-wif@wif-testing-412508.iam.gserviceaccount.com'
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
 
-- id: get-gke-credentials
-  uses: google-github-actions/get-gke-credentials@v0.4.0
-  with:
-    cluster_name: my-cluster
-    location: europe-west4
+    # Configure Workload Identity Federation and generate an access token.
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        token_format: 'access_token'
+        workload_identity_provider:  ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_ID }}
+        service_account: 'github-actions@github-actions-384318.iam.gserviceaccount.com'
 
-- id: get-pods
-  run: kubectl get pods
+    # List the instances in the project
+    - name: List Instances
+      run: |-
+        gcloud compute instances list --project github-actions-384318
+        
+    # Read secret     
+    - id: 'gcloud'
+      name: 'gcloud'
+      run: |-
+        gcloud secrets versions access "latest" --secret "testing-secret"
