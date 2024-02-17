@@ -27,7 +27,7 @@ jobs:
       uses: 'google-github-actions/auth@v1'
       with:
         token_format: 'access_token'
-        workload_identity_provider:  'projects/221742135820/locations/global/workloadIdentityPools/workload-identity-demo/providers/wif-demo-oidc'
+        workload_identity_provider:  'projects/221742135820/locations/global/workloadIdentityPools/gitlab-demo-wip-88/providers/gitlab-identity-provider'
         service_account: 'test-wif@github-actions-384318.iam.gserviceaccount.com'
 
     # List the instances in the project
